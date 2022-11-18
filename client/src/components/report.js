@@ -18,9 +18,11 @@ import { useReactToPrint } from "react-to-print";
 export default function Report() {
   const [userdetails, setuserdetails] = useState("");
   const [certificates, setcertificates] = useState([]);
+  const [name, setName] = useState("pdf_report");
+  const current = new Date();
+
   const navigate = useNavigate();
   let user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
 
   if (!user) {
     navigate("/login");
@@ -38,12 +40,14 @@ export default function Report() {
     result = await result.json();
     setcertificates(result.result.certificates);
     setuserdetails(result.result);
+    setName(userdetails.name);
     console.log("userid", result);
   };
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    documentTitle: userdetails.name,
   });
 
   const pageStyle = {
@@ -96,10 +100,7 @@ export default function Report() {
     color: "#434A54",
   };
 
-  const btnStyle = { margin: "auto" ,
-textTransform:'none',
-
-};
+  const btnStyle = { margin: "auto", textTransform: "none" };
 
   return (
     <Container sx={{ py: 2 }} maxWidth="xl">
@@ -111,7 +112,12 @@ textTransform:'none',
           Edit the Report
         </Button>
       </Box>
-      <div className="afour" style={pageStyle} ref={componentRef}>
+      <div
+        className="afour"
+        style={pageStyle}
+        ref={componentRef}
+        name="pdf_report"
+      >
         <Typography variant="h1" sx={typoStyle}>
           {userdetails.name}
         </Typography>
@@ -121,6 +127,15 @@ textTransform:'none',
         <Typography sx={subheadingStyle}>
           Roll No: {userdetails.rollNo} &nbsp;| &nbsp;Reg No:{" "}
           {userdetails.regNo}
+        </Typography>
+        <Typography
+          sx={{
+            color: "#707070",
+            fontSize: "14px",
+          }}
+        >
+          Date: {current.getDate()}/{current.getMonth()}/{current.getFullYear()}{" "}
+          | Time: {current.toLocaleTimeString()}
         </Typography>
         <ColoredLine color="black" />
 

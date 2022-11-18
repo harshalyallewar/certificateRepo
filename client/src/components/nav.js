@@ -37,6 +37,11 @@ function Nav() {
     setAnchorEl(null);
   }
   const handleCloseForPages = (page)=>{
+    if(page=="logout"){
+      localStorage.clear();
+      return;
+    }
+
     navigate('/'+page);
     console.log("/" + page );
     setAnchorEl(null);
@@ -199,26 +204,26 @@ function Nav() {
               {auth
                 ? [
                     <MenuItem
-                      key="products"
+                      key="Home"
                       onClick={() => handleCloseForPages("")}
                     >
-                      Products
+                      Home
                     </MenuItem>,
                     <MenuItem
-                      key="addproducts"
-                      onClick={() => handleCloseForPages("add")}
+                      key="viewreport"
+                      onClick={() => handleCloseForPages("viewreport")}
                     >
-                      Add Product
+                      View Report
                     </MenuItem>,
                     <MenuItem
-                      key="updateproducts"
-                      onClick={() => handleCloseForPages("update")}
+                      key="accountdetails"
+                      onClick={() => handleCloseForPages("accountdetails")}
                     >
-                      Update Product
+                      Account Details
                     </MenuItem>,
                     <MenuItem
                       key="logoutproducts"
-                      onClick={() => handleCloseForPages("login")}
+                      onClick={() => handleCloseForPages("logout")}
                     >
                       Log Out
                     </MenuItem>,

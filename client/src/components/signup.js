@@ -141,7 +141,7 @@ const Signup = () => {
             <TextField
               size="small"
               required
-              label="Enter Username"
+              label="Enter Name"
               sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
               onChange={(e) => setName(e.target.value)}
             />

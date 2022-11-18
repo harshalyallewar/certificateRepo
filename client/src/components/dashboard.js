@@ -6,8 +6,16 @@ import {
   Button,
   Typography,
   Box,
+  IconButton,
+  Divider,
+  Select,
+  MenuItem,
+  NativeSelect,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 function Dashboard() {
   const userTemplate = {
@@ -15,14 +23,15 @@ function Dashboard() {
     eventName: "",
     organizer: "",
     duration: "",
-    prize: "",
-    sem: "",
+    prize: "None",
+    sem: "None",
     certiLink: "",
   };
 
   const [certificates, setcertificates] = useState([]);
+  const [prize, setPrize] = React.useState("");
   const id = JSON.parse(localStorage.getItem("user"))._id;
-  console.log(id);
+  console.log("main fucntion cert", certificates);
 
   useEffect(() => {
     fetchData();
@@ -35,20 +44,24 @@ function Dashboard() {
       method: "GET",
     });
     result = await result.json();
+    if(!result){
+      console.log('no result');
+      return;
+    }
     setcertificates(result.result.certificates);
     console.log("userid", result);
   };
 
   const handleOnChange = (e, index) => {
     let name = e.target.name;
-
+ console.log(e.target.name, e.target.value);
     const updatedObject = Object.assign(certificates[index], {
-      [e.target.name]: e.target.value,
+      [name]: e.target.value,
     });
-
+    console.log(name, e.target.value, updatedObject);
     certificates[index] = updatedObject;
 
-    console.log(certificates, index);
+   
   };
 
   const handleOnAdd = () => {
@@ -66,6 +79,18 @@ function Dashboard() {
 
     console.log(result);
   };
+
+  const minusCertificate = (index) => {
+    console.log(`deleted item at index ${index}`);
+    let temp = [...certificates];
+    temp.splice(index, 1);
+    setcertificates(temp);
+  };
+
+  const handlePrizeChange = (e)=>{
+    setPrize(e.target.value);
+    console.log(e.target.value);
+  }
 
   const paperStyle = {
     marginTop: "40px",
@@ -110,7 +135,6 @@ function Dashboard() {
                   variant="outlined"
                 ></TextField>
               </Grid>
-
               <Grid sx={gridItemStyle} item md={2}>
                 <TextField
                   defaultValue={certificate.eventName}
@@ -123,7 +147,6 @@ function Dashboard() {
                   variant="outlined"
                 ></TextField>
               </Grid>
-
               <Grid sx={gridItemStyle} item md={2}>
                 <TextField
                   defaultValue={certificate.organizer}
@@ -136,7 +159,7 @@ function Dashboard() {
                   variant="outlined"
                 ></TextField>
               </Grid>
-
+              <Divider />
               <Grid sx={gridItemStyle} item md={1}>
                 <TextField
                   defaultValue={certificate.duration}
@@ -150,7 +173,7 @@ function Dashboard() {
               </Grid>
 
               <Grid sx={gridItemStyle} item md={1}>
-                <TextField
+                {/* <TextField
                   defaultValue={certificate.prize}
                   name="prize"
                   label="Prize"
@@ -159,11 +182,27 @@ function Dashboard() {
                   onChange={(e) => handleOnChange(e, index)}
                   size="small"
                   variant="outlined"
-                ></TextField>
+                ></TextField> */}
+                <FormControl fullWidth>
+                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Prize
+                  </InputLabel>
+                  <NativeSelect
+                    defaultValue={certificate.prize}
+                    onChange={(e) => handleOnChange(e, index)}
+                    name="prize"
+                  >
+                    <option value={"1st"}>1st</option>
+                    <option value={"2nd"}>2nd</option>
+                    <option value={"3rd"}>3rd</option>
+                    <option value={"Participate"}>Participate</option>
+                    <option value="None">None</option>
+                  </NativeSelect>
+                </FormControl>
               </Grid>
 
               <Grid sx={gridItemStyle} item md={1}>
-                <TextField
+                {/* <TextField
                   defaultValue={certificate.sem}
                   name="sem"
                   label="Sem"
@@ -172,7 +211,27 @@ function Dashboard() {
                   onChange={(e) => handleOnChange(e, index)}
                   size="small"
                   variant="outlined"
-                ></TextField>
+                ></TextField> */}
+                <FormControl fullWidth>
+                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Sem
+                  </InputLabel>
+                  <NativeSelect
+                    defaultValue={certificate.sem}
+                    onChange={(e) => handleOnChange(e, index)}
+                    name="sem"
+                  >
+                    <option value={"1st"}>1</option>
+                    <option value={"2nd"}>2</option>
+                    <option value={"3rd"}>3</option>
+                    <option value={"4th"}>4</option>
+                    <option value={"5th"}>5</option>
+                    <option value={"6th"}>6</option>
+                    <option value={"7th"}>7</option>
+                    <option value={"8th"}>8</option>
+                    <option value="None">None</option>
+                  </NativeSelect>
+                </FormControl>
               </Grid>
 
               <Grid sx={gridItemStyle} item md={1}>
@@ -186,6 +245,12 @@ function Dashboard() {
                   size="small"
                   variant="outlined"
                 ></TextField>
+              </Grid>
+
+              <Grid item>
+                <IconButton onClick={() => minusCertificate(index)}>
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
               </Grid>
             </Grid>
           );

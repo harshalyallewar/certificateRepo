@@ -109,6 +109,7 @@ const Login = () => {
             <TextField
               size="small"
               onChange={(e) => setPass(e.target.value)}
+              type='password'
               label="Enter Password"
               sx={{ width: { xs: "260px", sm: "290px", md: "330px" } }}
             />
