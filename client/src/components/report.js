@@ -34,7 +34,7 @@ export default function Report() {
 
   const fetchData = async () => {
     let userid = user._id;
-    let result = await fetch(`http://localhost:10/api/getData/${userid}`, {
+    let result = await fetch(`/api/getData/${userid}`, {
       method: "GET",
     });
     result = await result.json();

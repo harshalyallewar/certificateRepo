@@ -65,7 +65,7 @@ const Signup = () => {
         return;
       }
 
-      let result = await fetch("http://localhost:10/api/signup", {
+      let result = await fetch("/api/signup", {
         method: "POST",
         body: JSON.stringify({
           name,
