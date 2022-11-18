@@ -18,8 +18,8 @@ const Signup = () => {
     eventName: "",
     organizer: "",
     duration: "",
-    prize: "",
-    sem: "a",
+    prize: "None",
+    sem: "None",
     certiLink: "",
   };
   
