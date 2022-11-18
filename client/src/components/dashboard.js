@@ -69,7 +69,7 @@ function Dashboard() {
   };
 
   const handleUpdate = async () => {
-    let result = await fetch("http://localhost:10/api/updateCertificates", {
+    let result = await fetch("/api/updateCertificates", {
       method: "PUT",
       body: JSON.stringify({ id, certificates }),
       headers: { "Content-Type": "application/json" },
