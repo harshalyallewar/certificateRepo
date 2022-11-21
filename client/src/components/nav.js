@@ -111,22 +111,6 @@ function Nav() {
                 </Link>,
 
                 <Link
-                  key="profile"
-                  to="/profile"
-                  style={{ textDecoration: "none" }}
-                >
-                  <Button component="button" sx={{ textTransform: "none" }}>
-                    <Typography
-                      component="p"
-                      sx={{ color: "white", fontSize: "17px", px: 1 }}
-                      variant="p"
-                    >
-                      Account Details
-                    </Typography>
-                  </Button>
-                </Link>,
-
-                <Link
                   key="logout"
                   onClick={logout}
                   to="/login"
@@ -215,12 +199,7 @@ function Nav() {
                     >
                       View Report
                     </MenuItem>,
-                    <MenuItem
-                      key="accountdetails"
-                      onClick={() => handleCloseForPages("accountdetails")}
-                    >
-                      Account Details
-                    </MenuItem>,
+                  
                     <MenuItem
                       key="logoutproducts"
                       onClick={() => handleCloseForPages("logout")}

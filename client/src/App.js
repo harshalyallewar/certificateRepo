@@ -24,10 +24,10 @@ function App() {
         <Routes>
           <Route element={<PrivateComponent />}>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/viewreport" element={<Report />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/viewreport" element={<Report />} />
         </Routes>
       </BrowserRouter>
     </div>
