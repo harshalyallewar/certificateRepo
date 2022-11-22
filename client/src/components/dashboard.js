@@ -68,7 +68,7 @@ function Dashboard() {
     setcertificates([...certificates, Object.create(userTemplate)]);
   };
 
-  const  = async () => {
+  const handleUpdate = async () => {
     let temp = [...certificates];
     temp.sort((a, b) => a.sem - b.sem);
     console.log("handleUpdate", temp);
