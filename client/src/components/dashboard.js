@@ -68,9 +68,10 @@ function Dashboard() {
     setcertificates([...certificates, Object.create(userTemplate)]);
   };
 
-  const handleUpdate = async () => {
+  const  = async () => {
     let temp = [...certificates];
     temp.sort((a, b) => a.sem - b.sem);
+    console.log("handleUpdate", temp);
 
     let result = await fetch("/api/updateCertificates", {
       method: "PUT",
