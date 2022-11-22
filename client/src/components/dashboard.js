@@ -69,13 +69,11 @@ function Dashboard() {
   };
 
   const handleUpdate = async () => {
-    let temp = [...certificates];
-    temp.sort((a, b) => a.sem - b.sem);
-    console.log("handleUpdate", temp);
+   
 
     let result = await fetch("/api/updateCertificates", {
       method: "PUT",
-      body: JSON.stringify({ id, temp }),
+      body: JSON.stringify({ id, certificates }),
       headers: { "Content-Type": "application/json" },
     });
 
